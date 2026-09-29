@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
-
 @RestController
 @RequestMapping("/musicas")
 public class MusicaController {
@@ -25,21 +23,21 @@ public class MusicaController {
 
 
     @PostMapping
-    Musica create(Musica musica){
+    Musica create(@RequestBody Musica musica){
         return musicaService.create(musica);
     }
 
-    @GetMapping
-    Optional<Musica> findById(Long id){
+    @GetMapping("/{id}")
+    Optional<Musica> findById(@PathVariable("id")Long id){
         return musicaService.findById(id);
     }
 
     @PutMapping
-    Musica update(Musica musica){
+    Musica update(@RequestBody Musica musica){
         return musicaService.update(musica);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     void deleteById(@PathVariable("id")Long id){
          musicaService.deleteById(id);
     }
